@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TextField } from '@mui/material';
-import { setInput, setMessage, endGame, startGame } from '../store/gameSlice';
+import { setInput, checkAnswer, startGame, hiraganaToRomaji  } from '../store/gameSlice';
 import { RootState } from '../store';
 
 const InputBox: React.FC = () => {
@@ -12,8 +12,10 @@ const InputBox: React.FC = () => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     dispatch(setInput(value));
-    if (value === currentHiragana) {
-      dispatch(setMessage('正确'));
+    dispatch(checkAnswer());
+    
+    const romaji = hiraganaToRomaji[currentHiragana];
+    if (value === romaji) {
       setTimeout(() => {
         dispatch(startGame());
       }, 500); // 0.5秒后开始下一轮
