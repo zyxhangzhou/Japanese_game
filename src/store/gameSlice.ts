@@ -5,6 +5,7 @@ interface GameState {
   input: string;
   isPlaying: boolean;
   message: string;
+  timer: number;  // 新增
 }
 
 const initialState: GameState = {
@@ -12,7 +13,10 @@ const initialState: GameState = {
   input: '',
   isPlaying: false,
   message: '',
+  timer: 5,  // 初始化为5秒
 };
+
+
 
 const hiraganaList = ["あ","い","う","え","お",
   "か","き","く","け","こ",
@@ -28,6 +32,14 @@ const hiraganaList = ["あ","い","う","え","お",
 
 export const hiraganaToRomaji: Record<string, string> = {
   'あ': 'a', 'い': 'i', 'う': 'u', 'え': 'e', 'お': 'o',
+  'か': 'ka', 'き': 'ki', 'く': 'ku', 'け': 'ke', 'こ': 'ko',
+  'さ': 'sa', 'し': 'shi', 'す': 'su', 'せ': 'se', 'そ': 'so',
+  'た': 'ta', 'ち': 'chi', 'つ': 'tsu', 'て': 'te', 'と': 'to',
+  'な': 'na', 'に': 'ni', 'ぬ': 'nu', 'ね': 'ne', 'の': 'no',
+  'は': 'ha', 'ひ': 'hi', 'ふ': 'fu', 'へ': 'he', 'ほ': 'ho',
+  'や': 'ya', 'ゆ': 'yu', 'よ': 'yo',
+  'ら': 'ra', 'り': 'ri', 'る': 'ru', 'れ': 're', 'ろ': 'ro',
+  'わ': 'wa', 'を': 'wo', 'ん': 'nn',
   // 添加更多映射
 };
 
@@ -41,6 +53,7 @@ const gameSlice = createSlice({
       state.input = '';
       state.isPlaying = true;
       state.message = '';
+      state.timer = 5; // 每次开始游戏重置为5秒
     },
     endGame(state) {
       state.isPlaying = false;
@@ -48,6 +61,9 @@ const gameSlice = createSlice({
     },
     setInput(state, action: PayloadAction<string>) {
       state.input = action.payload;
+    },
+    tickTimer(state) {
+      state.timer -= 1; // 倒计时递减
     },
     checkAnswer(state) {
       const romaji = hiraganaToRomaji[state.currentHiragana];
@@ -60,5 +76,5 @@ const gameSlice = createSlice({
   },
 });
 
-export const { startGame, endGame, setInput, checkAnswer } = gameSlice.actions;
+export const { startGame, endGame, setInput, tickTimer, checkAnswer } = gameSlice.actions;
 export default gameSlice.reducer;
