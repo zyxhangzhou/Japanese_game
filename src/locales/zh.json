@@ -1,0 +1,7 @@
+{
+    "game.start": "开始！",
+    "game.pause": "暂停！",
+    "game.title": "日语学习游戏",
+    "game.countdown": "倒计时: {seconds} 秒",
+    "game.over": "你输啦！"
+}

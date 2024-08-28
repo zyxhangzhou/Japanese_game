@@ -1,0 +1,7 @@
+{
+    "game.start": "Start!",
+    "game.pause": "Pause!",
+    "game.title": "Japanese Learning Game",
+    "game.countdown": "Countdown: {seconds} seconds",
+    "game.over": "Game Over!"
+}

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Box } from '@mui/material';
 import { startGame, endGame } from '../store/gameSlice';
 import { RootState } from '../store';
+import { FormattedMessage } from 'react-intl';
 
 const ControlButtons: React.FC = () => {
   const dispatch = useDispatch();
@@ -20,11 +21,11 @@ const ControlButtons: React.FC = () => {
     <Box mt={2}>
       {!isPlaying ? (
         <Button variant="contained" color="primary" onClick={handleStart}>
-          开始游戏
+          <FormattedMessage id="game.start" />
         </Button>
       ) : (
         <Button variant="contained" color="secondary" onClick={handlePause}>
-          暂停游戏
+          <FormattedMessage id="game.pause" />
         </Button>
       )}
     </Box>
